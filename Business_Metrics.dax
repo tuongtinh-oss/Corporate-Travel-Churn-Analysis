@@ -1,0 +1,11 @@
+-- 1. Tỷ lệ giữ chân khách hàng
+Retention Rate = 1 - DIVIDE(SUM(df_master[is_churned]), COUNT(df_master[userCode]), 0)
+
+-- 2. Doanh thu thất thoát ước tính (Nếu khách đặt hotel)
+Potential Revenue Leakage = 
+VAR AvgHotelPrice = AVERAGE(hotels[total])
+VAR MissingHotels = [Total Flights] - [Total Hotels]
+RETURN MissingHotels * AvgHotelPrice
+
+-- 3. Chỉ số gắn kết (Stickiness Score)
+Stickiness = [Hotel Attachment Rate] * [Trips per User]
